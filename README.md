@@ -34,7 +34,7 @@ This project implements a classic 5-stage RISC-V pipeline — IF, ID, EX, MEM, W
 
 The diagram below shows the complete datapath: five pipeline stages, four pipeline registers, forwarding paths, the stall unit, and the MAC unit.
 
-![Pipeline Architecture](pipeline_architecture.png)
+![Pipeline Architecture](Pipeline Architecture.png)
 
 ---
 
