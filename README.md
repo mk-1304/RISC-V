@@ -136,9 +136,9 @@ The 3 stall cycles arise from load-use hazards (a `LW` followed immediately by a
 ## Project Structure
 
 ```
-RISCV_Pipeline/
+RISCV_Pipeline
 │
-├── riscv.v                  # Complete processor — all modules in one file
+├── riscv                    # Top-level processor (datapath + control)
 │   ├── alu                  # ALU: ADD, SUB, AND, OR
 │   ├── reg_file             # 32×32 register file with write-first forwarding
 │   ├── imm_gen              # Immediate generator (I / S / B types)
@@ -147,7 +147,6 @@ RISCV_Pipeline/
 │   ├── pc                   # Program counter register
 │   ├── instr_mem            # Instruction memory (reads test.hex)
 │   ├── data_mem             # Data memory (word-addressed, 256 words)
-│   ├── riscv1               # Top-level processor (datapath + control)
 │   ├── if_id                # IF/ID pipeline register (stallable, flushable)
 │   ├── id_ex                # ID/EX pipeline register (flushable)
 │   ├── ex_mem               # EX/MEM pipeline register
