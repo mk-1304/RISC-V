@@ -7,7 +7,7 @@ A fully functional **32-bit pipelined RISC-V processor** implemented in Verilog,
 ## Table of Contents
 
 - [Overview](#overview)
-- [Architecture](#architecture)
+- [Architecture](#Pipeline Architecture)
 - [Pipeline Stages](#pipeline-stages)
 - [Hazard Handling](#hazard-handling)
 - [Custom MAC Instruction](#custom-mac-instruction)
