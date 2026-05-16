@@ -197,6 +197,7 @@ Cycles       = 42
 Instructions = 32
 Stalls       = 3
 CPI          = 1.310000
+```
 
 ---
 
