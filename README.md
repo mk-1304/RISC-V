@@ -155,8 +155,6 @@ RISCV_Pipeline
 │   ├── stlunit              # Stall unit (load-use hazard detection)
 │   └── risc_tb              # Testbench (reads test.hex + expected.hex)
 │
-├── test.hex                 # Test program in hex (loaded into instr_mem)
-├── expected.hex             # Expected register values for automated checking
 ├── pipeline_architecture.png  # Architecture diagram
 └── README.md
 ```
@@ -168,30 +166,16 @@ RISCV_Pipeline
 ### Prerequisites
 
 - ModelSim (or any Verilog simulator supporting `$readmemh`)
-- A hex assembler or hand-assembled `test.hex` file
 
-### Step 1 — Prepare instruction memory
+### Step 1 — Load the instruction program
 
-Write your RISC-V program, assemble it to hex, and save as `test.hex`. Each line is one 32-bit instruction in hex, e.g.:
+The processor fetches instructions from `instr_mem`, which reads a hex file via `$readmemh`. Update the file path in `instr_mem` to point to your assembled program:
 
-```
-00500093   // ADDI x1, x0, 5
-00A00113   // ADDI x2, x0, 10
-002081B3   // ADD  x3, x1, x2
+```verilog
+$readmemh("test.hex", mem);  // line ~103 in riscv.v
 ```
 
-### Step 2 — Prepare expected outputs
-
-Fill `expected.hex` with the expected register values after the program completes. Use `xxxxxxxx` for registers you don't want to check:
-
-```
-xxxxxxxx   // x0  (always 0, skip)
-00000005   // x1  (expect 5)
-0000000A   // x2  (expect 10)
-0000000F   // x3  (expect 15)
-```
-
-### Step 3 — Simulate in ModelSim
+### Step 2 — Simulate in ModelSim
 
 ```tcl
 vlog riscv.v
@@ -199,7 +183,20 @@ vsim risc_tb
 run -all
 ```
 
-The testbench will print `PASS` or `FAIL` for each checked register at the end of simulation.
+### Step 3 — Read the output
+
+The testbench waits until `PC ≥ 136` (all instructions fetched), then prints register values and performance counters:
+
+```
+x0 = 0
+x1 = 5
+x2 = 10
+x3 = 15
+...
+Cycles       = 42
+Instructions = 32
+Stalls       = 3
+CPI          = 1.310000
 
 ---
 
