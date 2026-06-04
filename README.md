@@ -1,6 +1,6 @@
 # 5-Stage Pipelined RISC-V Processor
 
-A fully functional **32-bit pipelined RISC-V processor** implemented in Verilog, targeting the RV32I subset with a custom Multiply-Accumulate (MAC) instruction. The design resolves data hazards through forwarding and load-use stalling, and handles control hazards via pipeline flushing — achieving a **CPI of 1.31** across a 32-instruction test program.
+A **32-bit pipelined RISC-V processor** implemented in Verilog, targeting the RV32I subset with a custom Multiply-Accumulate (MAC) instruction. The design resolves data hazards through forwarding and load-use stalling, and handles control hazards via pipeline flushing — achieving a **CPI of 1.31** across a 32-instruction test program.
 
 ---
 
